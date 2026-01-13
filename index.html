@@ -269,7 +269,7 @@ const SCRIPT_URL =
     <div class="errorText" id="err_whatsapp">This field is required</div>
 
     <div class="consent">
-      <input type="checkbox" id="consent" onclick="updateState()">
+      <<input type="checkbox" id="consent" onchange="updateState()">
       I confirm that the information provided is accurate and consent to its use
       for official communication purposes.
     </div>
@@ -332,10 +332,13 @@ function formatPhone(el){
 }
 
 function updateState(){
-  let ok=true;
+
+  let ok = true;
+
   mandatoryFields.forEach(f=>{
     const i=document.getElementById(f.id);
     const e=document.getElementById(f.err);
+
     if(!i.value.trim()){
       ok=false;
       i.classList.add("error");
@@ -345,9 +348,23 @@ function updateState(){
       e.style.display="none";
     }
   });
-  submitBtn.disabled=!ok||!consent.checked;
-  submitBtn.classList.toggle("enabled",!submitBtn.disabled);
+
+  if(ok && consent.checked){
+    submitBtn.disabled=false;
+    submitBtn.classList.add("enabled");
+    helperText.innerText="";
+  }else{
+    submitBtn.disabled=true;
+    submitBtn.classList.remove("enabled");
+
+    if(!ok){
+      helperText.innerText="Please complete all mandatory fields.";
+    }else{
+      helperText.innerText="Please confirm consent to proceed.";
+    }
+  }
 }
+
 
 function submitForm(){
 
