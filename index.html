@@ -377,22 +377,23 @@ mandatoryFields.forEach(f=>{
 });
 
 /* ===== SUBMIT WITH DUPLICATE + UPDATE ===== */
+<script>
 function submitForm(){
   updateState();
   if(submitBtn.disabled) return false;
 
-  const ref=generateRef();
-  const data=new URLSearchParams();
+  const ref = generateRef();
+  const data = new URLSearchParams();
 
-  data.append("ref",ref);
-  data.append("agency",agency.value.toUpperCase());
-  data.append("pic1",pic1.value.toUpperCase());
-  data.append("pic2",pic2.value.toUpperCase());
-  data.append("contact1",contact1.value);
-  data.append("contact2",contact2.value);
-  data.append("whatsapp",whatsapp.value);
-  data.append("consent","YES");
-  data.append("update","NO");
+  data.append("ref", ref);
+  data.append("agency", agency.value.toUpperCase());
+  data.append("pic1", pic1.value.toUpperCase());
+  data.append("pic2", pic2.value.toUpperCase());
+  data.append("contact1", contact1.value);
+  data.append("contact2", contact2.value);
+  data.append("whatsapp", whatsapp.value);
+  data.append("consent", "YES");
+  data.append("update", "NO");
 
   fetch(SCRIPT_URL,{method:"POST",body:data})
   .then(r=>r.json())
@@ -406,7 +407,7 @@ function submitForm(){
         .then(r=>r.json())
         .then(res2=>{
           if(res2.status==="UPDATED"){
-            showSuccess(res2.ref,res2.updateInfo);
+            showSuccess(res2.ref, true, res2.updateInfo);
           }else{
             alert("Update limit reached. Please contact administrator.");
             location.reload();
@@ -419,20 +420,32 @@ function submitForm(){
       return;
     }
 
-    showSuccess(res.ref,"NEW SUBMISSION");
+    // NEW SUBMISSION
+    showSuccess(res.ref, false, "NEW SUBMISSION");
   });
 
   return false;
 }
 
-function showSuccess(ref,status){
+function showSuccess(ref, isUpdate, statusText){
+
   formBox.style.display="none";
   successBox.style.display="block";
   watermark.style.display="block";
-  refDisplay.innerText="REFERENCE NO: "+ref;
-  summaryBox.innerHTML+=
-    `<div><b>STATUS:</b> ${status}</div>`;
+
+  refDisplay.innerText = "REFERENCE NO: " + ref;
+
+  summaryBox.innerHTML =
+    `<div><b>AGENCY:</b> ${agency.value.toUpperCase()}</div>
+     <div><b>PIC NAME 1 (MANDATORY):</b> ${pic1.value.toUpperCase()}</div>
+     ${pic2.value ? `<div><b>PIC NAME 2 (OPTIONAL):</b> ${pic2.value.toUpperCase()}</div>` : ""}
+     <div><b>CONTACT (MANDATORY):</b> ${contact1.value}</div>
+     ${contact2.value ? `<div><b>CONTACT (OPTIONAL):</b> ${contact2.value}</div>` : ""}
+     <div><b>WHATSAPP NO (MANDATORY):</b> ${whatsapp.value}</div>
+     <div><b>STATUS:</b> ${statusText}</div>`;
 }
+</script>
+
 
 function generateRef(){
   const d=new Date();
