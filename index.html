@@ -350,11 +350,19 @@ function updateState(){
 }
 
 function submitForm(){
+
+  // FORCE VALIDATION HIGHLIGHT
   updateState();
-  if(submitBtn.disabled) return false;
+
+  // Jika masih tak valid → STOP & BIAR ERROR MERAH PAPAR
+  if(submitBtn.disabled){
+    helperText.innerText = "Please complete all mandatory fields.";
+    return false;
+  }
 
   const ref=generateRef();
   const data=new URLSearchParams();
+
   data.append("ref",ref);
   data.append("agency",agency.value.toUpperCase());
   data.append("pic1",pic1.value.toUpperCase());
@@ -375,7 +383,7 @@ function submitForm(){
         .then(r=>r.json())
         .then(res2=>{
           if(res2.status==="UPDATED"){
-            showSuccess(res2.ref,res2.updateInfo || "UPDATED");
+            showSuccess(res2.ref,res2.updateInfo||"UPDATED");
           }else{
             alert("Update limit reached.");
             location.reload();
@@ -391,6 +399,7 @@ function submitForm(){
 
   return false;
 }
+
 
 function showSuccess(ref, statusText){
 
