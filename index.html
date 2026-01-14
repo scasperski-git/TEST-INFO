@@ -241,6 +241,46 @@ button.enabled:hover{
 @keyframes spin{
   to{ transform:rotate(360deg); }
 }
+
+/* ===== CONSENT ENHANCED ===== */
+.consent-wrap{
+  margin:12px 0;
+}
+
+.consent-label{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  cursor:pointer;
+}
+
+.consent-label input{
+  margin-top:3px;
+  accent-color:#1e88e5;
+}
+
+.consent-label input:checked + .consent-text{
+  color:#2e7d32; /* hijau */
+  font-weight:bold;
+}
+
+/* ===== CLOSE BUTTON ===== */
+.closeBtn{
+  width:100%;
+  margin-top:12px;
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  font-size:15px;
+  font-weight:bold;
+  background:#2e7d32;
+  color:#fff;
+  cursor:pointer;
+}
+.closeBtn:hover{
+  background:#1b5e20;
+}
+
 </style>
 </head>
 
@@ -314,11 +354,15 @@ const SCRIPT_URL =
     </div>
     <div class="errorText" id="err_whatsapp">This field is required</div>
 
-    <div class="consent">
-      <input type="checkbox" id="consent" onchange="updateState()">
+    <div class="consent consent-wrap">
+  <label class="consent-label">
+    <input type="checkbox" id="consent" onchange="updateState()">
+    <span class="consent-text">
       I confirm that the information provided is accurate and consent to its use
       for official communication purposes.
-    </div>
+    </span>
+  </label>
+</div>
 
     <button type="submit" id="submitBtn">Submit</button>
     <div class="helper" id="helperText"></div>
@@ -345,6 +389,9 @@ const SCRIPT_URL =
   </div>
 
   <p style="text-align:center;font-size:13px;">You may safely close this page.</p>
+
+<button class="closeBtn" onclick="closePage()">Close</button>
+
 </div>
 
 <!-- ===== PROCESSING OVERLAY ===== -->
@@ -544,6 +591,13 @@ function generateRef(){
   trademark.innerHTML=
     `© ${year} <a href="https://sczpnet.org" target="_blank">sczpnet.org</a> •Official Agency Communication Portal• v2.0`;
 })();
+
+function closePage(){
+  window.close();
+  setTimeout(()=>{
+    alert("You may now close this tab.");
+  },300);
+}
 </script>
 
 </body>
