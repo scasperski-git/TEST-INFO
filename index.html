@@ -383,11 +383,25 @@ function hideProcessing(){
 }
 
 function formatPhone(el){
-  let v=el.value.replace(/\D/g,'');
-  if(v.startsWith("0"))v="6"+v;
-  if(!v.startsWith("6"))v="6"+v;
-  el.value=v;
+  let v = el.value.replace(/\D/g, '');
+
+  // Convert +60 / 60 to 0
+  if (v.startsWith("60")) v = "0" + v.slice(2);
+
+  // MOBILE (01X-XXXXXXX / 01X-XXXXXXXX)
+  if (v.startsWith("01")) {
+    if (v.length <= 10)
+      el.value = v.replace(/(\d{3})(\d+)/, "$1-$2");
+    else
+      el.value = v.replace(/(\d{3})(\d{4})(\d+)/, "$1-$2$3");
+  }
+
+  // LANDLINE (03-XXXX XXXX / 04-XXXX XXXX)
+  else if (v.startsWith("0")) {
+    el.value = v.replace(/(\d{2})(\d+)/, "$1-$2");
+  }
 }
+
 
 function updateState(){
   let ok=true;
