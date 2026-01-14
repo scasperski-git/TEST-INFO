@@ -242,27 +242,79 @@ button.enabled:hover{
   to{ transform:rotate(360deg); }
 }
 
-/* ===== CONSENT ENHANCED ===== */
-.consent-wrap{
-  margin:12px 0;
+/* ===== CONSENT CARD (FINAL CANTIK) ===== */
+.consent-box{
+  margin:14px 0 10px;
 }
 
-.consent-label{
+.consent-card{
   display:flex;
   align-items:flex-start;
-  gap:8px;
+  gap:12px;
+  padding:12px 14px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  background:#fafafa;
   cursor:pointer;
+  transition:.25s;
 }
 
-.consent-label input{
-  margin-top:3px;
-  accent-color:#1e88e5;
+.consent-card:hover{
+  border-color:#90caf9;
+  background:#f5faff;
 }
 
-.consent-label input:checked + .consent-text{
-  color:#2e7d32; /* hijau */
+/* Hide default checkbox */
+.consent-card input{
+  display:none;
+}
+
+/* Custom checkbox */
+.checkmark{
+  width:18px;
+  height:18px;
+  border:2px solid #90caf9;
+  border-radius:4px;
+  position:relative;
+  margin-top:2px;
+  flex-shrink:0;
+}
+
+/* Tick */
+.checkmark::after{
+  content:"";
+  position:absolute;
+  left:4px;
+  top:0px;
+  width:5px;
+  height:10px;
+  border:solid #fff;
+  border-width:0 2px 2px 0;
+  transform:rotate(45deg);
+  opacity:0;
+}
+
+/* Checked */
+.consent-card input:checked + .checkmark{
+  background:#2e7d32;
+  border-color:#2e7d32;
+}
+
+.consent-card input:checked + .checkmark::after{
+  opacity:1;
+}
+
+.consent-card input:checked ~ .consent-text{
+  color:#2e7d32;
   font-weight:bold;
 }
+
+.consent-text{
+  font-size:13px;
+  line-height:1.5;
+  color:#444;
+}
+
 
 /* ===== CLOSE BUTTON ===== */
 .closeBtn{
@@ -354,15 +406,17 @@ const SCRIPT_URL =
     </div>
     <div class="errorText" id="err_whatsapp">This field is required</div>
 
-    <div class="consent consent-wrap">
-  <label class="consent-label">
+<div class="consent-box">
+  <label class="consent-card">
     <input type="checkbox" id="consent" onchange="updateState()">
+    <span class="checkmark"></span>
     <span class="consent-text">
       I confirm that the information provided is accurate and consent to its use
       for official communication purposes.
     </span>
   </label>
 </div>
+
 
     <button type="submit" id="submitBtn">Submit</button>
     <div class="helper" id="helperText"></div>
