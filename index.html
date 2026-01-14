@@ -288,17 +288,29 @@ const SCRIPT_URL =
     <label>Contact No (Mandatory) <span class="req">*</span></label>
     <div class="input-wrap"><span>📞</span>
       <input type="tel" id="contact1" placeholder="Example: 0123456789" oninput="formatPhone(this)">
+      <div class="errorText" id="err_contact1_format">
+  Invalid contact number format (must start with 0)
+</div>
+
     </div>
     <div class="errorText" id="err_contact1">This field is required</div>
 
     <label>Contact No (Optional)</label>
     <div class="input-wrap"><span>📞</span>
       <input type="tel" id="contact2" placeholder="Example: 0123456789" oninput="formatPhone(this)">
+      <div class="errorText" id="err_contact2_format">
+  Invalid contact number format (must start with 0)
+</div>
+
     </div>
 
     <label>WhatsApp No (Mandatory) <span class="req">*</span></label>
     <div class="input-wrap"><span>💬</span>
       <input type="tel" id="whatsapp" placeholder="Example: 0123456789" oninput="formatPhone(this)">
+      <div class="errorText" id="err_whatsapp_format">
+  Invalid contact number format (must start with 0)
+</div>
+
     </div>
     <div class="errorText" id="err_whatsapp">This field is required</div>
 
