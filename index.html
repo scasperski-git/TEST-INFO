@@ -395,24 +395,39 @@ function hideProcessing(){
 }
 
 function formatPhone(el){
-  let v = el.value.replace(/\D/g, '');
+  let raw = el.value.replace(/\D/g, '');
 
-  // Convert +60 / 60 to 0
-  if (v.startsWith("60")) v = "0" + v.slice(2);
+  const errId =
+    el.id === "contact1" ? "err_contact1_format" :
+    el.id === "whatsapp" ? "err_whatsapp_format" : null;
 
-  // MOBILE (01X-XXXXXXX / 01X-XXXXXXXX)
-  if (v.startsWith("01")) {
-    if (v.length <= 10)
-      el.value = v.replace(/(\d{3})(\d+)/, "$1-$2");
-    else
-      el.value = v.replace(/(\d{3})(\d{4})(\d+)/, "$1-$2$3");
+  if (errId) document.getElementById(errId).style.display = "none";
+  el.classList.remove("error");
+
+  if (!raw) return;
+
+  // ❌ JIKA TAK MULA DENGAN 0
+  if (!raw.startsWith("0")) {
+    if (errId) {
+      document.getElementById(errId).style.display = "block";
+      el.classList.add("error");
+    }
+    return; // STOP – jangan format
   }
 
-  // LANDLINE (03-XXXX XXXX / 04-XXXX XXXX)
-  else if (v.startsWith("0")) {
-    el.value = v.replace(/(\d{2})(\d+)/, "$1-$2");
+  // ✅ FORMAT BILA SAH
+  if (raw.startsWith("01")) {
+    // Mobile
+    if (raw.length <= 10)
+      el.value = raw.replace(/(\d{3})(\d+)/, "$1-$2");
+    else
+      el.value = raw.replace(/(\d{3})(\d{4})(\d+)/, "$1-$2$3");
+  } else {
+    // Landline
+    el.value = raw.replace(/(\d{2})(\d+)/, "$1-$2");
   }
 }
+
 
 
 function updateState(){
@@ -429,6 +444,15 @@ function updateState(){
       e.style.display="none";
     }
   });
+  // ❌ FORMAT CHECK (CONTACT & WHATSAPP)
+["contact1","whatsapp"].forEach(id=>{
+  const el = document.getElementById(id);
+  if (el.value && !el.value.trim().startsWith("0")) {
+    ok = false;
+    el.classList.add("error");
+  }
+});
+
   if(ok && consent.checked){
     submitBtn.disabled=false;
     submitBtn.classList.add("enabled");
