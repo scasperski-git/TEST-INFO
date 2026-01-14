@@ -444,7 +444,7 @@ const SCRIPT_URL =
 
   <p style="text-align:center;font-size:13px;">You may safely close this page.</p>
 
-<button class="closeBtn" onclick="closePage()">Close</button>
+<button class="closeBtn" onclick="returnToMain()">Return to Main Page</button>
 
 </div>
 
@@ -646,12 +646,10 @@ function generateRef(){
     `© ${year} <a href="https://sczpnet.org" target="_blank">sczpnet.org</a> •Official Agency Communication Portal• v2.0`;
 })();
 
-function closePage(){
-  window.close();
-  setTimeout(()=>{
-    alert("You may now close this tab.");
-  },300);
+function returnToMain(){
+  location.reload();
 }
+
 </script>
 
 </body>
