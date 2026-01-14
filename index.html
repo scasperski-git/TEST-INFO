@@ -399,6 +399,7 @@ function formatPhone(el){
 
   const errId =
     el.id === "contact1" ? "err_contact1_format" :
+    el.id === "contact1" ? "err_contact2_format" :
     el.id === "whatsapp" ? "err_whatsapp_format" : null;
 
   if (errId) document.getElementById(errId).style.display = "none";
