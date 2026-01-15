@@ -623,12 +623,12 @@ function showSuccess(ref,statusText){
   watermark.style.display="block";
   refDisplay.innerText="REFERENCE NO: "+ref;
   summaryBox.innerHTML=
-    `<div><b>AGENCY NAME (MANDATORY):</b> ${agency.value.toUpperCase()}</div>
-     <div><b>OFFICER NAME 1 (MANDATORY):</b> ${pic1.value.toUpperCase()}</div>
+    `<div><b>AGENCY NAME:</b> ${agency.value.toUpperCase()}</div>
+     <div><b>OFFICER NAME 1:</b> ${pic1.value.toUpperCase()}</div>
      ${pic2.value?`<div><b>OFFICER NAME 2 (OPTIONAL):</b> ${pic2.value.toUpperCase()}</div>`:""}
-     <div><b>CONTACT NO (MANDATORY):</b> ${contact1.value}</div>
+     <div><b>CONTACT NO:</b> ${contact1.value}</div>
      ${contact2.value?`<div><b>CONTACT NO (OPTIONAL):</b> ${contact2.value}</div>`:""}
-     <div><b>WHATSAPP NO (MANDATORY):</b> ${whatsapp.value}</div>
+     <div><b>WHATSAPP NO:</b> ${whatsapp.value}</div>
      <div><b>STATUS:</b> ${statusText}</div>`;
 }
 
