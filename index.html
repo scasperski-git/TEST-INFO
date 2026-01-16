@@ -333,7 +333,139 @@ button.enabled:hover{
   background:#1b5e20;
   }
 }
+/* ===== DARK MODE LITE ===== */
+body{
+  background:
+    radial-gradient(circle at top left, #0ea5e9, transparent 40%),
+    linear-gradient(180deg, #020617, #0f172a);
+  color:#e5e7eb;
+}
 
+/* ===== CARD ===== */
+.container,
+.maintenance{
+  background:#111827;
+  box-shadow:0 12px 30px rgba(0,0,0,.6);
+}
+
+/* Top accent */
+.container::before{
+  background:linear-gradient(90deg,#38bdf8,#0ea5e9);
+}
+
+/* ===== TEXT ===== */
+h2{
+  color:#f8fafc;
+}
+
+label{
+  color:#cbd5f5;
+}
+
+.helper,
+.footer,
+.consent-text{
+  color:#94a3b8;
+}
+
+/* ===== INPUT ===== */
+input{
+  background:#020617;
+  border:1px solid #1f2937;
+  color:#e5e7eb;
+}
+
+input::placeholder{
+  color:#64748b;
+}
+
+input:focus{
+  border-color:#38bdf8;
+  box-shadow:0 0 0 2px rgba(56,189,248,.25);
+}
+
+/* Error */
+input.error{
+  border-color:#ef4444;
+  background:#020617;
+}
+
+.errorText{
+  color:#f87171;
+}
+
+/* ===== SECTION TITLE ===== */
+.section-title{
+  color:#38bdf8;
+  border-left-color:#38bdf8;
+}
+
+/* ===== BUTTON ===== */
+button{
+  background:#1f2937;
+  color:#94a3b8;
+}
+
+button.enabled{
+  background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+  color:#020617;
+}
+
+button.enabled:hover{
+  box-shadow:0 8px 20px rgba(14,165,233,.35);
+}
+
+/* ===== CONSENT CARD ===== */
+.consent-card{
+  background:#020617;
+  border-color:#1f2937;
+}
+
+.consent-card:hover{
+  background:#020617;
+  border-color:#38bdf8;
+}
+
+.checkmark{
+  border-color:#38bdf8;
+}
+
+.consent-card input:checked + .checkmark{
+  background:#22c55e;
+  border-color:#22c55e;
+}
+
+/* ===== SUCCESS ===== */
+.ref{
+  background:#020617;
+  border-color:#38bdf8;
+  color:#38bdf8;
+}
+
+.summary div{
+  background:#020617;
+  border-color:#1f2937;
+  color:#e5e7eb;
+}
+
+/* ===== PROCESSING ===== */
+#processingOverlay{
+  background:rgba(2,6,23,.85);
+}
+
+.spinner{
+  border-color:#1f2937;
+  border-top-color:#38bdf8;
+}
+
+.processingText{
+  color:#cbd5f5;
+}
+
+/* ===== FOOTER ===== */
+.divider{
+  background:linear-gradient(to right,transparent,#38bdf8,transparent);
+}
 
 </style>
 </head>
